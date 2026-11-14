@@ -29,8 +29,21 @@ How decisions are returned:
 AI tools cannot weaken the policy: changes to UDS, Claude Code and Git hook
 configuration require explicit approval, and project configuration can only add rules.
 
-Limitation: the default command `uds hook claude-code` requires `uds` on `PATH`.
-If it is missing the hook cannot run, so either keep UDS on `PATH` or use `--python-path`.
+Limitations:
+
+- The default command `uds hook claude-code` requires `uds` on `PATH`. If it is missing the
+  hook cannot run, so either keep UDS on `PATH` or use `--python-path`.
+- Claude Code runs project hooks only in **trusted** workspaces. Sessions started with
+  `CLAUDE_CODE_IGNORE_PERSISTED_TRUST` (for example child sessions launched from inside another
+  Claude Code session) do not run them at all. Verify with a harmless test such as asking
+  Claude to run `git -C . push` and checking for a `UDS:` message.
+- Claude Code protects its own settings files with a built-in safety check that applies before
+  UDS; edits to `.claude/settings*.json` therefore always require approval.
+
+Live verification (Claude Code 2.1.323, Windows 11, 2026-11-14): in fresh headless sessions with
+the tools pre-allowed, `--no-verify` commits and writes of a fake AWS key were denied with UDS
+reasons, `git -C . push`, `rm -rf build` and reading `.env.*` required approval, `git status` ran
+untouched, and no blocked action changed the repository. Hooks run through Git Bash on Windows.
 
 ## Any other AI agent: `uds guard`
 

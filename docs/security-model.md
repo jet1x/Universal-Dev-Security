@@ -38,6 +38,9 @@ UDS follows least privilege, explicit consent, and honest reporting.
   depth; use CI scanning and repository push protection as independent controls.
 - The Claude Code hook requires `uds` to be runnable; if Claude Code cannot start the hook
   command, it cannot enforce anything. Use `--python-path` to avoid PATH dependence.
+- Claude Code executes project hooks only in trusted workspaces; in untrusted contexts (or
+  sessions started with `CLAUDE_CODE_IGNORE_PERSISTED_TRUST`) the UDS hook does not run. The
+  `permissions.ask` rule UDS adds for `git push` still applies there.
 - Built-in secret patterns (used when Gitleaks is unavailable and for AI-agent decisions) are a
   conservative safety net, not a replacement for Gitleaks.
 - A clean scan means only that the executed scanners found nothing.
