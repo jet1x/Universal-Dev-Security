@@ -8,7 +8,7 @@ schema, enforces a central security policy for Git and AI coding agents, and
 produces a dark, self-contained HTML security dashboard.
 
 > **Status:** `1.0.0` — first stable release. See
-> [DEVELOPMENT_STATUS.md](DEVELOPMENT_STATUS.md) for verified functionality,
+> [DEVELOPMENT_STATUS.md](https://github.com/jet1x/Universal-Dev-Security/blob/main/DEVELOPMENT_STATUS.md) for verified functionality,
 > known issues and test results. UDS reports what its scanners find; a clean
 > result is never proof that a project is secure.
 
@@ -38,17 +38,18 @@ else is `unclassified`. No security score is invented.
 
 Requirements: Python 3.11+, Windows, Linux or macOS. Git is recommended.
 
-```powershell
-# Windows (from a release folder containing the wheel and SHA256SUMS)
-.\scripts\install.ps1 -Wheel .\dist\1.0.0\universal_dev_security-1.0.0-py3-none-any.whl
-```
-
 ```bash
-# Linux / macOS
-sh scripts/install.sh --wheel dist/1.0.0/universal_dev_security-1.0.0-py3-none-any.whl
+python -m pip install universal-dev-security
 ```
 
-Then, inside a project:
+The package on [PyPI](https://pypi.org/project/universal-dev-security/) is identical to the
+assets of the [GitHub release](https://github.com/jet1x/Universal-Dev-Security/releases)
+(same SHA-256). Prefer an isolated install? Use `pipx install universal-dev-security`, or the
+checksum-verifying installers described in
+[docs/installation.md](https://github.com/jet1x/Universal-Dev-Security/blob/main/docs/installation.md).
+
+Install at least [Gitleaks](https://github.com/gitleaks/gitleaks#installing); `uds doctor`
+shows the official install command for every scanner. Then, inside a project:
 
 ```bash
 uds doctor                 # runtime, config and scanner availability (+ official install sources)
@@ -60,19 +61,19 @@ uds integrate claude-code --apply   # enforce the UDS policy inside Claude Code
 ```
 
 Every command that changes files is a **dry run by default** and shows a diff;
-`--apply` creates a recovery checkpoint first. See [docs/installation.md](docs/installation.md)
-for scanner installation and upgrades, and [docs/commands.md](docs/commands.md) for all commands.
+`--apply` creates a recovery checkpoint first. See [docs/installation.md](https://github.com/jet1x/Universal-Dev-Security/blob/main/docs/installation.md)
+for scanner installation and upgrades, and [docs/commands.md](https://github.com/jet1x/Universal-Dev-Security/blob/main/docs/commands.md) for all commands.
 
 ## Documentation
 
-- [Installation and upgrades](docs/installation.md)
-- [Commands](docs/commands.md)
-- [Scanners, severity and privacy](docs/scanners.md)
-- [Integrations: Claude Code, GitHub, VS Code, other agents](docs/integrations.md)
-- [Architecture](docs/architecture.md)
-- [Security model](docs/security-model.md) and [global policy](policies/GLOBAL_SECURITY_POLICY.md)
-- [Dashboard design system](docs/dashboard-design-system.md)
-- [Release process](docs/release.md)
+- [Installation and upgrades](https://github.com/jet1x/Universal-Dev-Security/blob/main/docs/installation.md)
+- [Commands](https://github.com/jet1x/Universal-Dev-Security/blob/main/docs/commands.md)
+- [Scanners, severity and privacy](https://github.com/jet1x/Universal-Dev-Security/blob/main/docs/scanners.md)
+- [Integrations: Claude Code, GitHub, VS Code, other agents](https://github.com/jet1x/Universal-Dev-Security/blob/main/docs/integrations.md)
+- [Architecture](https://github.com/jet1x/Universal-Dev-Security/blob/main/docs/architecture.md)
+- [Security model](https://github.com/jet1x/Universal-Dev-Security/blob/main/docs/security-model.md) and [global policy](https://github.com/jet1x/Universal-Dev-Security/blob/main/policies/GLOBAL_SECURITY_POLICY.md)
+- [Dashboard design system](https://github.com/jet1x/Universal-Dev-Security/blob/main/docs/dashboard-design-system.md)
+- [Release process](https://github.com/jet1x/Universal-Dev-Security/blob/main/docs/release.md)
 
 ## Safety guarantees
 
@@ -88,9 +89,9 @@ repository-level protections (for example GitHub push protection) enabled too.
 
 ## Contributing and security
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) and [SECURITY.md](SECURITY.md).
-Changes are listed in [CHANGELOG.md](CHANGELOG.md).
+See [CONTRIBUTING.md](https://github.com/jet1x/Universal-Dev-Security/blob/main/CONTRIBUTING.md) and [SECURITY.md](https://github.com/jet1x/Universal-Dev-Security/blob/main/SECURITY.md).
+Changes are listed in [CHANGELOG.md](https://github.com/jet1x/Universal-Dev-Security/blob/main/CHANGELOG.md).
 
 ## License
 
-Apache License 2.0. See [LICENSE](LICENSE).
+Apache License 2.0. See [LICENSE](https://github.com/jet1x/Universal-Dev-Security/blob/main/LICENSE).

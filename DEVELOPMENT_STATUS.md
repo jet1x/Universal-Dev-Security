@@ -67,13 +67,12 @@
 5. `install.sh` is written for Linux/macOS and has not been executed.
 6. Python 3.15 is newer than some packages support (PyYAML, Semgrep wheels); UDS itself is
    dependency-free and works on 3.11–3.15.
-7. `uds update check --source pypi` will only be meaningful once UDS is published under that name;
-   until then use `--source github:OWNER/REPO`.
+7. ~~PyPI not published~~ — published 2026-11-14 via Trusted Publishing; PyPI files are identical
+   to the GitHub release assets (verified SHA-256), and `pip install universal-dev-security` was tested.
 
 ## Pending decisions (need maintainer approval)
 
-- Publishing the `v1.0.0` GitHub release (tag pushed; assets uploaded by the maintainer).
-- PyPI publication (not done).
+- None for 1.0.0: GitHub release `v1.0.0` and PyPI `universal-dev-security 1.0.0` are published.
 - Private vulnerability reporting is enabled (verified via API); secret-scanning push protection
   was enabled by the maintainer but cannot be verified without repository-admin authentication.
 
@@ -84,3 +83,5 @@
 3. Pin GitHub Actions to commit SHAs in both workflows.
 4. Optional offline mode for OSV-Scanner (local databases) to avoid sending package metadata.
 5. Hosted web dashboard consuming report schema 2.0 (with authentication and authorization).
+6. Release 1.0.1 so the PyPI project page gets the README with absolute links (1.0.0 on PyPI
+   has relative links that only work on GitHub).

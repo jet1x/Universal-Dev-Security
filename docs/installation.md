@@ -4,6 +4,19 @@
 
 UDS requires Python 3.11 or newer and has no runtime dependencies.
 
+**From PyPI (simplest):**
+
+```bash
+python -m pip install universal-dev-security     # or: pipx install universal-dev-security
+```
+
+The PyPI files are the same files attached to the GitHub release (identical SHA-256),
+published through Trusted Publishing.
+
+**With the checksum-verifying installers** (download the wheel and `SHA256SUMS` from the
+[GitHub release](https://github.com/jet1x/Universal-Dev-Security/releases); the scripts are in the
+release's source archive):
+
 **Windows (user-level, no administrator rights):**
 
 ```powershell
@@ -54,12 +67,12 @@ as `skipped` with reason `unsupported_version`.
 
 ## Upgrade UDS
 
-1. Check: `uds update check --source github:jet1x/Universal-Dev-Security` (or `--source pypi` once published). This is the
+1. Check: `uds update check --source pypi` (or `--source github:jet1x/Universal-Dev-Security`). This is the
    only command that contacts the network for updates, and only when a source is given.
 2. Read the [CHANGELOG](../CHANGELOG.md) for breaking changes.
 3. Upgrade inside the UDS virtual environment:
    - from a verified wheel: re-run the installer with the new wheel;
-   - from PyPI (once published): `python -m pip install --upgrade universal-dev-security`.
+   - from PyPI: `python -m pip install --upgrade universal-dev-security`.
 4. Run `uds doctor` and `uds scan`.
 
 Project files (`.uds/config.toml`, history, checkpoints) are compatible across
