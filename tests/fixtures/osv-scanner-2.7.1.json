@@ -1,0 +1,590 @@
+{
+ "results": [
+  {
+   "source": {
+    "path": "/project/requirements.txt",
+    "type": "lockfile"
+   },
+   "packages": [
+    {
+     "package": {
+      "name": "jinja2",
+      "version": "2.4.1",
+      "ecosystem": "PyPI",
+      "purl": "pkg:pypi/jinja2@2.4.1"
+     },
+     "groups": [
+      {
+       "ids": [
+        "PYSEC-2014-8",
+        "GHSA-8r7q-cvjq-x353"
+       ],
+       "aliases": [
+        "CVE-2014-1402",
+        "GHSA-8r7q-cvjq-x353",
+        "PYSEC-2014-8"
+       ],
+       "max_severity": "8.6"
+      },
+      {
+       "ids": [
+        "PYSEC-2014-82",
+        "GHSA-fqh9-2qgg-h84h"
+       ],
+       "aliases": [
+        "CVE-2014-0012",
+        "GHSA-fqh9-2qgg-h84h",
+        "PYSEC-2014-82"
+       ],
+       "max_severity": "6.9"
+      },
+      {
+       "ids": [
+        "PYSEC-2019-217",
+        "GHSA-462w-v97r-4m45"
+       ],
+       "aliases": [
+        "CVE-2019-10906",
+        "GHSA-462w-v97r-4m45",
+        "PYSEC-2019-217"
+       ],
+       "max_severity": "8.6"
+      },
+      {
+       "ids": [
+        "PYSEC-2019-220",
+        "GHSA-hj2j-77xm-mc5v"
+       ],
+       "aliases": [
+        "CVE-2016-10745",
+        "GHSA-hj2j-77xm-mc5v",
+        "PYSEC-2019-220"
+       ],
+       "max_severity": "8.6"
+      }
+     ],
+     "vulnerabilities": [
+      {
+       "affected": [
+        {
+         "database_specific": {
+          "source": "https://github.com/pypa/advisory-database/blob/main/vulns/jinja2/PYSEC-2014-8.yaml"
+         },
+         "package": {
+          "ecosystem": "PyPI",
+          "name": "jinja2",
+          "purl": "pkg:pypi/jinja2"
+         },
+         "ranges": [
+          {
+           "events": [
+            {
+             "introduced": "0"
+            },
+            {
+             "fixed": "2.7.2"
+            }
+           ],
+           "type": "ECOSYSTEM"
+          }
+         ],
+         "versions": [
+          "2.0",
+          "2.0rc1",
+          "2.1",
+          "2.1.1",
+          "2.2",
+          "2.2.1",
+          "2.3",
+          "2.3.1",
+          "2.4",
+          "2.4.1",
+          "2.5",
+          "2.5.1",
+          "2.5.2",
+          "2.5.3",
+          "2.5.4",
+          "2.5.5",
+          "2.6",
+          "2.7",
+          "2.7.1"
+         ]
+        }
+       ],
+       "aliases": [
+        "CVE-2014-1402",
+        "GHSA-8r7q-cvjq-x353"
+       ],
+       "details": "The default configuration for bccache.FileSystemBytecodeCache in Jinja2 before 2.7.2 does not properly create temporary files, which allows local users to gain privileges via a crafted .cache file with a name starting with __jinja2_ in /tmp.",
+       "id": "PYSEC-2014-8",
+       "modified": "2023-11-08T03:57:34.512953Z",
+       "published": "2014-05-19T14:55:00Z",
+       "references": [
+        {
+         "type": "WEB",
+         "url": "https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=734747"
+        },
+        {
+         "type": "ADVISORY",
+         "url": "http://advisories.mageia.org/MGASA-2014-0028.html"
+        },
+        {
+         "type": "WEB",
+         "url": "http://jinja.pocoo.org/docs/changelog/"
+        },
+        {
+         "type": "WEB",
+         "url": "http://openwall.com/lists/oss-security/2014/01/10/3"
+        },
+        {
+         "type": "REPORT",
+         "url": "https://bugzilla.redhat.com/show_bug.cgi?id=1051421"
+        },
+        {
+         "type": "ADVISORY",
+         "url": "http://www.mandriva.com/security/advisories?name=MDVSA-2014:096"
+        },
+        {
+         "type": "WEB",
+         "url": "http://openwall.com/lists/oss-security/2014/01/10/2"
+        },
+        {
+         "type": "ADVISORY",
+         "url": "http://secunia.com/advisories/59017"
+        },
+        {
+         "type": "ADVISORY",
+         "url": "http://secunia.com/advisories/58918"
+        },
+        {
+         "type": "ADVISORY",
+         "url": "http://secunia.com/advisories/60770"
+        },
+        {
+         "type": "ADVISORY",
+         "url": "http://secunia.com/advisories/60738"
+        },
+        {
+         "type": "ADVISORY",
+         "url": "http://secunia.com/advisories/56287"
+        },
+        {
+         "type": "WEB",
+         "url": "http://www.gentoo.org/security/en/glsa/glsa-201408-13.xml"
+        },
+        {
+         "type": "WEB",
+         "url": "https://oss.oracle.com/pipermail/el-errata/2014-June/004192.html"
+        },
+        {
+         "type": "ADVISORY",
+         "url": "http://secunia.com/advisories/58783"
+        },
+        {
+         "type": "ADVISORY",
+         "url": "http://rhn.redhat.com/errata/RHSA-2014-0748.html"
+        },
+        {
+         "type": "ADVISORY",
+         "url": "http://rhn.redhat.com/errata/RHSA-2014-0747.html"
+        },
+        {
+         "type": "ADVISORY",
+         "url": "https://github.com/advisories/GHSA-8r7q-cvjq-x353"
+        }
+       ],
+       "schema_version": "1.7.3"
+      },
+      {
+       "affected": [
+        {
+         "database_specific": {
+          "source": "https://github.com/pypa/advisory-database/blob/main/vulns/jinja2/PYSEC-2014-82.yaml"
+         },
+         "package": {
+          "ecosystem": "PyPI",
+          "name": "jinja2",
+          "purl": "pkg:pypi/jinja2"
+         },
+         "ranges": [
+          {
+           "events": [
+            {
+             "introduced": "0"
+            },
+            {
+             "fixed": "acb672b6a179567632e032f547582f30fa2f4aa7"
+            }
+           ],
+           "repo": "https://github.com/mitsuhiko/jinja2",
+           "type": "GIT"
+          },
+          {
+           "events": [
+            {
+             "introduced": "0"
+            },
+            {
+             "fixed": "2.7.3"
+            }
+           ],
+           "type": "ECOSYSTEM"
+          }
+         ],
+         "versions": [
+          "2.0",
+          "2.0rc1",
+          "2.1",
+          "2.1.1",
+          "2.2",
+          "2.2.1",
+          "2.3",
+          "2.3.1",
+          "2.4",
+          "2.4.1",
+          "2.5",
+          "2.5.1",
+          "2.5.2",
+          "2.5.3",
+          "2.5.4",
+          "2.5.5",
+          "2.6",
+          "2.7",
+          "2.7.1",
+          "2.7.2"
+         ]
+        }
+       ],
+       "aliases": [
+        "CVE-2014-0012",
+        "GHSA-fqh9-2qgg-h84h"
+       ],
+       "details": "FileSystemBytecodeCache in Jinja2 2.7.2 does not properly create temporary directories, which allows local users to gain privileges by pre-creating a temporary directory with a user's uid.  NOTE: this vulnerability exists because of an incomplete fix for CVE-2014-1402.",
+       "id": "PYSEC-2014-82",
+       "modified": "2026-06-10T17:01:55.953302840Z",
+       "published": "2014-05-19T14:55:00Z",
+       "references": [
+        {
+         "type": "REPORT",
+         "url": "https://bugzilla.redhat.com/show_bug.cgi?id=1051421"
+        },
+        {
+         "type": "WEB",
+         "url": "https://github.com/mitsuhiko/jinja2/pull/292"
+        },
+        {
+         "type": "FIX",
+         "url": "https://github.com/mitsuhiko/jinja2/commit/acb672b6a179567632e032f547582f30fa2f4aa7"
+        },
+        {
+         "type": "WEB",
+         "url": "http://seclists.org/oss-sec/2014/q1/73"
+        },
+        {
+         "type": "WEB",
+         "url": "https://github.com/mitsuhiko/jinja2/pull/296"
+        },
+        {
+         "type": "ADVISORY",
+         "url": "http://secunia.com/advisories/60738"
+        },
+        {
+         "type": "WEB",
+         "url": "http://www.gentoo.org/security/en/glsa/glsa-201408-13.xml"
+        },
+        {
+         "type": "ADVISORY",
+         "url": "http://secunia.com/advisories/56328"
+        },
+        {
+         "type": "ADVISORY",
+         "url": "https://github.com/advisories/GHSA-fqh9-2qgg-h84h"
+        }
+       ],
+       "schema_version": "1.7.5"
+      },
+      {
+       "affected": [
+        {
+         "database_specific": {
+          "source": "https://github.com/pypa/advisory-database/blob/main/vulns/jinja2/PYSEC-2019-217.yaml"
+         },
+         "package": {
+          "ecosystem": "PyPI",
+          "name": "jinja2",
+          "purl": "pkg:pypi/jinja2"
+         },
+         "ranges": [
+          {
+           "events": [
+            {
+             "introduced": "0"
+            },
+            {
+             "fixed": "2.10.1"
+            }
+           ],
+           "type": "ECOSYSTEM"
+          }
+         ],
+         "versions": [
+          "2.0",
+          "2.0rc1",
+          "2.1",
+          "2.1.1",
+          "2.10",
+          "2.2",
+          "2.2.1",
+          "2.3",
+          "2.3.1",
+          "2.4",
+          "2.4.1",
+          "2.5",
+          "2.5.1",
+          "2.5.2",
+          "2.5.3",
+          "2.5.4",
+          "2.5.5",
+          "2.6",
+          "2.7",
+          "2.7.1",
+          "2.7.2",
+          "2.7.3",
+          "2.8",
+          "2.8.1",
+          "2.9",
+          "2.9.1",
+          "2.9.2",
+          "2.9.3",
+          "2.9.4",
+          "2.9.5",
+          "2.9.6"
+         ]
+        }
+       ],
+       "aliases": [
+        "CVE-2019-10906",
+        "GHSA-462w-v97r-4m45"
+       ],
+       "details": "In Pallets Jinja before 2.10.1, str.format_map allows a sandbox escape.",
+       "id": "PYSEC-2019-217",
+       "modified": "2023-11-08T04:00:58.644982Z",
+       "published": "2019-04-07T00:29:00Z",
+       "references": [
+        {
+         "type": "ARTICLE",
+         "url": "https://palletsprojects.com/blog/jinja-2-10-1-released"
+        },
+        {
+         "type": "WEB",
+         "url": "https://lists.apache.org/thread.html/b2380d147b508bbcb90d2cad443c159e63e12555966ab4f320ee22da@%3Ccommits.airflow.apache.org%3E"
+        },
+        {
+         "type": "WEB",
+         "url": "https://lists.apache.org/thread.html/46c055e173b52d599c648a98199972dbd6a89d2b4c4647b0500f2284@%3Cdevnull.infra.apache.org%3E"
+        },
+        {
+         "type": "WEB",
+         "url": "https://lists.apache.org/thread.html/f0c4a03418bcfe70c539c5dbaf99c04c98da13bfa1d3266f08564316@%3Ccommits.airflow.apache.org%3E"
+        },
+        {
+         "type": "WEB",
+         "url": "https://lists.apache.org/thread.html/7f39f01392d320dfb48e4901db68daeece62fd60ef20955966739993@%3Ccommits.airflow.apache.org%3E"
+        },
+        {
+         "type": "WEB",
+         "url": "https://lists.apache.org/thread.html/57673a78c4d5c870d3f21465c7e2946b9f8285c7c57e54c2ae552f02@%3Ccommits.airflow.apache.org%3E"
+        },
+        {
+         "type": "WEB",
+         "url": "https://lists.apache.org/thread.html/320441dccbd9a545320f5f07306d711d4bbd31ba43dc9eebcfc602df@%3Cdevnull.infra.apache.org%3E"
+        },
+        {
+         "type": "WEB",
+         "url": "https://lists.apache.org/thread.html/2b52b9c8b9d6366a4f1b407a8bde6af28d9fc73fdb3b37695fd0d9ac@%3Cdevnull.infra.apache.org%3E"
+        },
+        {
+         "type": "WEB",
+         "url": "https://lists.apache.org/thread.html/09fc842ff444cd43d9d4c510756fec625ef8eb1175f14fd21de2605f@%3Cdevnull.infra.apache.org%3E"
+        },
+        {
+         "type": "WEB",
+         "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/QCDYIS254EJMBNWOG4S5QY6AOTOR4TZU/"
+        },
+        {
+         "type": "WEB",
+         "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/DSW3QZMFVVR7YE3UT4YRQA272TYAL5AF/"
+        },
+        {
+         "type": "WEB",
+         "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/TS7IVZAJBWOHNRDMFJDIZVFCMRP6YIUQ/"
+        },
+        {
+         "type": "ADVISORY",
+         "url": "https://access.redhat.com/errata/RHSA-2019:1152"
+        },
+        {
+         "type": "WEB",
+         "url": "http://lists.opensuse.org/opensuse-security-announce/2019-05/msg00030.html"
+        },
+        {
+         "type": "ADVISORY",
+         "url": "https://access.redhat.com/errata/RHSA-2019:1237"
+        },
+        {
+         "type": "ADVISORY",
+         "url": "https://access.redhat.com/errata/RHSA-2019:1329"
+        },
+        {
+         "type": "WEB",
+         "url": "https://usn.ubuntu.com/4011-1/"
+        },
+        {
+         "type": "WEB",
+         "url": "https://usn.ubuntu.com/4011-2/"
+        },
+        {
+         "type": "WEB",
+         "url": "http://lists.opensuse.org/opensuse-security-announce/2019-06/msg00064.html"
+        },
+        {
+         "type": "ADVISORY",
+         "url": "https://github.com/advisories/GHSA-462w-v97r-4m45"
+        }
+       ],
+       "schema_version": "1.7.3"
+      },
+      {
+       "affected": [
+        {
+         "database_specific": {
+          "source": "https://github.com/pypa/advisory-database/blob/main/vulns/jinja2/PYSEC-2019-220.yaml"
+         },
+         "package": {
+          "ecosystem": "PyPI",
+          "name": "jinja2",
+          "purl": "pkg:pypi/jinja2"
+         },
+         "ranges": [
+          {
+           "events": [
+            {
+             "introduced": "0"
+            },
+            {
+             "fixed": "9b53045c34e61013dc8f09b7e52a555fa16bed16"
+            }
+           ],
+           "repo": "https://github.com/pallets/jinja",
+           "type": "GIT"
+          },
+          {
+           "events": [
+            {
+             "introduced": "0"
+            },
+            {
+             "fixed": "2.8.1"
+            }
+           ],
+           "type": "ECOSYSTEM"
+          }
+         ],
+         "versions": [
+          "2.0",
+          "2.0rc1",
+          "2.1",
+          "2.1.1",
+          "2.2",
+          "2.2.1",
+          "2.3",
+          "2.3.1",
+          "2.4",
+          "2.4.1",
+          "2.5",
+          "2.5.1",
+          "2.5.2",
+          "2.5.3",
+          "2.5.4",
+          "2.5.5",
+          "2.6",
+          "2.7",
+          "2.7.1",
+          "2.7.2",
+          "2.7.3",
+          "2.8"
+         ]
+        }
+       ],
+       "aliases": [
+        "CVE-2016-10745",
+        "GHSA-hj2j-77xm-mc5v"
+       ],
+       "details": "In Pallets Jinja before 2.8.1, str.format allows a sandbox escape.",
+       "id": "PYSEC-2019-220",
+       "modified": "2023-11-08T03:58:21.453618Z",
+       "published": "2019-04-08T13:29:00Z",
+       "references": [
+        {
+         "type": "ARTICLE",
+         "url": "https://palletsprojects.com/blog/jinja-281-released/"
+        },
+        {
+         "type": "FIX",
+         "url": "https://github.com/pallets/jinja/commit/9b53045c34e61013dc8f09b7e52a555fa16bed16"
+        },
+        {
+         "type": "ADVISORY",
+         "url": "https://access.redhat.com/errata/RHSA-2019:1022"
+        },
+        {
+         "type": "WEB",
+         "url": "http://lists.opensuse.org/opensuse-security-announce/2019-05/msg00030.html"
+        },
+        {
+         "type": "ADVISORY",
+         "url": "https://access.redhat.com/errata/RHSA-2019:1237"
+        },
+        {
+         "type": "ADVISORY",
+         "url": "https://access.redhat.com/errata/RHSA-2019:1260"
+        },
+        {
+         "type": "WEB",
+         "url": "https://usn.ubuntu.com/4011-1/"
+        },
+        {
+         "type": "WEB",
+         "url": "https://usn.ubuntu.com/4011-2/"
+        },
+        {
+         "type": "WEB",
+         "url": "http://lists.opensuse.org/opensuse-security-announce/2019-06/msg00064.html"
+        },
+        {
+         "type": "ADVISORY",
+         "url": "https://access.redhat.com/errata/RHSA-2019:3964"
+        },
+        {
+         "type": "ADVISORY",
+         "url": "https://access.redhat.com/errata/RHSA-2019:4062"
+        },
+        {
+         "type": "ADVISORY",
+         "url": "https://github.com/advisories/GHSA-hj2j-77xm-mc5v"
+        }
+       ],
+       "schema_version": "1.7.3"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "experimental_config": {
+  "licenses": {
+   "summary": false,
+   "allowlist": null
+  }
+ }
+}

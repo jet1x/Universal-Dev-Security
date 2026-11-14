@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "universal-dev-security"
+dynamic = ["version"]
+description = "One security system for every project: secrets, code, dependency and configuration scanning with a central policy engine, Git and AI-agent guards, and a local security dashboard."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+dependencies = []
+keywords = ["security", "devsecops", "gitleaks", "semgrep", "osv-scanner", "trivy", "sast", "sca", "claude-code", "secrets"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Security",
+    "Topic :: Software Development :: Quality Assurance",
+]
+
+[project.urls]
+Homepage = "https://github.com/jet1x/Universal-Dev-Security"
+Repository = "https://github.com/jet1x/Universal-Dev-Security.git"
+Issues = "https://github.com/jet1x/Universal-Dev-Security/issues"
+Changelog = "https://github.com/jet1x/Universal-Dev-Security/blob/main/CHANGELOG.md"
+Security = "https://github.com/jet1x/Universal-Dev-Security/blob/main/SECURITY.md"
+
+[project.scripts]
+uds = "universal_dev_security.cli:main"
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.dynamic]
+version = {attr = "universal_dev_security.__version__"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

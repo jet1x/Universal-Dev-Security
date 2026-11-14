@@ -1,0 +1,364 @@
+{
+ "SchemaVersion": 2,
+ "Trivy": {
+  "Version": "0.76.2"
+ },
+ "ReportID": "01a1d749-f580-70f5-8f48-7d252c6454db",
+ "CreatedAt": "2026-11-14T01:41:50.8480629+02:00",
+ "ArtifactType": "filesystem",
+ "Results": [
+  {
+   "Target": "requirements.txt",
+   "Class": "lang-pkgs",
+   "Type": "pip",
+   "Packages": [
+    {
+     "Name": "jinja2",
+     "Identifier": {
+      "PURL": "pkg:pypi/jinja2@2.4.1",
+      "UID": "e6a4200c580031fa"
+     },
+     "Version": "2.4.1",
+     "Locations": [
+      {
+       "StartLine": 1,
+       "EndLine": 1
+      }
+     ],
+     "AnalyzedBy": "pip"
+    },
+    {
+     "Name": "requests",
+     "Identifier": {
+      "PURL": "pkg:pypi/requests@2.19.0",
+      "UID": "6d59e745010602d4"
+     },
+     "Version": "2.19.0",
+     "Locations": [
+      {
+       "StartLine": 2,
+       "EndLine": 2
+      }
+     ],
+     "AnalyzedBy": "pip"
+    }
+   ],
+   "Vulnerabilities": [
+    {
+     "VulnerabilityID": "CVE-2014-1402",
+     "VendorIDs": [
+      "GHSA-8r7q-cvjq-x353"
+     ],
+     "PkgName": "jinja2",
+     "PkgIdentifier": {
+      "PURL": "pkg:pypi/jinja2@2.4.1",
+      "UID": "e6a4200c580031fa"
+     },
+     "InstalledVersion": "2.4.1",
+     "FixedVersion": "2.7.2",
+     "Status": "fixed",
+     "SeveritySource": "ghsa",
+     "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2014-1402",
+     "DataSource": {
+      "ID": "ghsa",
+      "Name": "GitHub Security Advisory pip",
+      "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Apip"
+     },
+     "Fingerprint": "sha256:c29a93536dcac3bd5a54d65e0c8ad4d9e859b8bf4380b575a338ca6686f80994",
+     "Title": "python-jinja2: FileSystemBytecodeCache insecure cache temporary file use",
+     "Description": "The default configuration for bccache.FileSystemBytecodeCache in Jinja2 before 2.7.2 does not properly create temporary files, which allows local users to gain privileges via a crafted .cache file with a name starting with __jinja2_ in /tmp.",
+     "Severity": "HIGH",
+     "CweIDs": [
+      "CWE-264"
+     ],
+     "VendorSeverity": {
+      "amazon": 2,
+      "ghsa": 3,
+      "nvd": 2,
+      "oracle-oval": 2,
+      "redhat": 2,
+      "ubuntu": 2
+     },
+     "CVSS": {
+      "ghsa": {
+       "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+       "V40Vector": "CVSS:4.0/AV:L/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N",
+       "V3Score": 8.4,
+       "V40Score": 8.6
+      },
+      "nvd": {
+       "V2Vector": "AV:L/AC:M/Au:N/C:P/I:P/A:P",
+       "V2Score": 4.4
+      },
+      "redhat": {
+       "V2Vector": "AV:L/AC:M/Au:N/C:P/I:P/A:P",
+       "V2Score": 4.4
+      }
+     },
+     "References": [
+      "http://advisories.mageia.org/MGASA-2014-0028.html",
+      "http://jinja.pocoo.org/docs/changelog",
+      "http://jinja.pocoo.org/docs/changelog/",
+      "http://openwall.com/lists/oss-security/2014/01/10/2",
+      "http://openwall.com/lists/oss-security/2014/01/10/3",
+      "http://rhn.redhat.com/errata/RHSA-2014-0747.html",
+      "http://rhn.redhat.com/errata/RHSA-2014-0748.html",
+      "http://secunia.com/advisories/56287",
+      "http://secunia.com/advisories/58783",
+      "http://secunia.com/advisories/58918",
+      "http://secunia.com/advisories/59017",
+      "http://secunia.com/advisories/60738",
+      "http://secunia.com/advisories/60770",
+      "http://www.gentoo.org/security/en/glsa/glsa-201408-13.xml",
+      "http://www.mandriva.com/security/advisories?name=MDVSA-2014:096",
+      "https://access.redhat.com/security/cve/CVE-2014-1402",
+      "https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=734747",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=1051421",
+      "https://github.com/advisories/GHSA-8r7q-cvjq-x353",
+      "https://github.com/pypa/advisory-database/tree/main/vulns/jinja2/PYSEC-2014-8.yaml",
+      "https://linux.oracle.com/cve/CVE-2014-1402.html",
+      "https://linux.oracle.com/errata/ELSA-2014-0747.html",
+      "https://nvd.nist.gov/vuln/detail/CVE-2014-1402",
+      "https://oss.oracle.com/pipermail/el-errata/2014-June/004192.html",
+      "https://ubuntu.com/security/notices/USN-2301-1",
+      "https://web.archive.org/web/20150523060528/http://www.mandriva.com/en/support/security/advisories/advisory/MDVSA-2014:096/?name=MDVSA-2014:096",
+      "https://www.cve.org/CVERecord?id=CVE-2014-1402"
+     ],
+     "PublishedDate": "2014-05-19T14:55:11.517Z",
+     "LastModifiedDate": "2026-05-06T22:30:45.22Z"
+    },
+    {
+     "VulnerabilityID": "CVE-2016-10745",
+     "VendorIDs": [
+      "GHSA-hj2j-77xm-mc5v"
+     ],
+     "PkgName": "jinja2",
+     "PkgIdentifier": {
+      "PURL": "pkg:pypi/jinja2@2.4.1",
+      "UID": "e6a4200c580031fa"
+     },
+     "InstalledVersion": "2.4.1",
+     "FixedVersion": "2.8.1",
+     "Status": "fixed",
+     "SeveritySource": "ghsa",
+     "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2016-10745",
+     "DataSource": {
+      "ID": "ghsa",
+      "Name": "GitHub Security Advisory pip",
+      "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Apip"
+     },
+     "Fingerprint": "sha256:9171c5fed4b8c1f9349d2aa408c0ee8107d98321e764cc639eec8cf73547f470",
+     "Title": "python-jinja2: Sandbox escape due to information disclosure via str.format",
+     "Description": "In Pallets Jinja before 2.8.1, str.format allows a sandbox escape.",
+     "Severity": "HIGH",
+     "CweIDs": [
+      "CWE-134"
+     ],
+     "VendorSeverity": {
+      "amazon": 3,
+      "ghsa": 3,
+      "nvd": 3,
+      "oracle-oval": 3,
+      "redhat": 3,
+      "ubuntu": 2
+     },
+     "CVSS": {
+      "ghsa": {
+       "V3Vector": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:N/A:N",
+       "V40Vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:N/SC:H/SI:N/SA:N",
+       "V3Score": 8.6,
+       "V40Score": 7.7
+      },
+      "nvd": {
+       "V2Vector": "AV:N/AC:L/Au:N/C:P/I:N/A:N",
+       "V3Vector": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:N/A:N",
+       "V2Score": 5,
+       "V3Score": 8.6
+      },
+      "redhat": {
+       "V3Vector": "CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H",
+       "V3Score": 9
+      }
+     },
+     "References": [
+      "http://lists.opensuse.org/opensuse-security-announce/2019-05/msg00030.html",
+      "http://lists.opensuse.org/opensuse-security-announce/2019-06/msg00064.html",
+      "https://access.redhat.com/errata/RHSA-2019:1022",
+      "https://access.redhat.com/errata/RHSA-2019:1237",
+      "https://access.redhat.com/errata/RHSA-2019:1260",
+      "https://access.redhat.com/errata/RHSA-2019:3964",
+      "https://access.redhat.com/errata/RHSA-2019:4062",
+      "https://access.redhat.com/security/cve/CVE-2016-10745",
+      "https://github.com/advisories/GHSA-hj2j-77xm-mc5v",
+      "https://github.com/pallets/jinja",
+      "https://github.com/pallets/jinja/commit/9b53045c34e61013dc8f09b7e52a555fa16bed16",
+      "https://github.com/pypa/advisory-database/tree/main/vulns/jinja2/PYSEC-2019-220.yaml",
+      "https://linux.oracle.com/cve/CVE-2016-10745.html",
+      "https://linux.oracle.com/errata/ELSA-2019-1022.html",
+      "https://nvd.nist.gov/vuln/detail/CVE-2016-10745",
+      "https://palletsprojects.com/blog/jinja-281-released",
+      "https://palletsprojects.com/blog/jinja-281-released/",
+      "https://ubuntu.com/security/notices/USN-4011-1",
+      "https://ubuntu.com/security/notices/USN-4011-2",
+      "https://usn.ubuntu.com/4011-1",
+      "https://usn.ubuntu.com/4011-1/",
+      "https://usn.ubuntu.com/4011-2",
+      "https://usn.ubuntu.com/4011-2/",
+      "https://www.cve.org/CVERecord?id=CVE-2016-10745"
+     ],
+     "PublishedDate": "2019-04-08T13:29:00.28Z",
+     "LastModifiedDate": "2026-06-17T00:40:16.883Z"
+    },
+    {
+     "VulnerabilityID": "CVE-2019-10906",
+     "VendorIDs": [
+      "GHSA-462w-v97r-4m45"
+     ],
+     "PkgName": "jinja2",
+     "PkgIdentifier": {
+      "PURL": "pkg:pypi/jinja2@2.4.1",
+      "UID": "e6a4200c580031fa"
+     },
+     "InstalledVersion": "2.4.1",
+     "FixedVersion": "2.10.1",
+     "Status": "fixed",
+     "SeveritySource": "ghsa",
+     "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2019-10906",
+     "DataSource": {
+      "ID": "ghsa",
+      "Name": "GitHub Security Advisory pip",
+      "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Apip"
+     },
+     "Fingerprint": "sha256:c5411027453db8df7f606467a915cad53e778d3d9f2cb53dfbda7d0d898dd022",
+     "Title": "python-jinja2: str.format_map allows sandbox escape",
+     "Description": "In Pallets Jinja before 2.10.1, str.format_map allows a sandbox escape.",
+     "Severity": "HIGH",
+     "VendorSeverity": {
+      "amazon": 3,
+      "azure": 3,
+      "ghsa": 3,
+      "nvd": 3,
+      "oracle-oval": 3,
+      "redhat": 3,
+      "rocky": 3,
+      "ubuntu": 2
+     },
+     "CVSS": {
+      "ghsa": {
+       "V3Vector": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:N/A:N",
+       "V40Vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:N/SC:H/SI:N/SA:N",
+       "V3Score": 8.6,
+       "V40Score": 7.7
+      },
+      "nvd": {
+       "V2Vector": "AV:N/AC:L/Au:N/C:P/I:N/A:N",
+       "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:N/A:N",
+       "V2Score": 5,
+       "V3Score": 8.6
+      },
+      "redhat": {
+       "V3Vector": "CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H",
+       "V3Score": 9
+      }
+     },
+     "References": [
+      "http://lists.opensuse.org/opensuse-security-announce/2019-05/msg00030.html",
+      "http://lists.opensuse.org/opensuse-security-announce/2019-06/msg00064.html",
+      "https://access.redhat.com/errata/RHSA-2019:1152",
+      "https://access.redhat.com/errata/RHSA-2019:1237",
+      "https://access.redhat.com/errata/RHSA-2019:1329",
+      "https://access.redhat.com/security/cve/CVE-2019-10906",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=1698839",
+      "https://creativecommons.org/licenses/by/4.0/",
+      "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-10906",
+      "https://errata.rockylinux.org/RLSA-2019:1152",
+      "https://github.com/advisories/GHSA-462w-v97r-4m45",
+      "https://github.com/pallets/jinja",
+      "https://github.com/pypa/advisory-database/tree/main/vulns/jinja2/PYSEC-2019-217.yaml",
+      "https://linux.oracle.com/cve/CVE-2019-10906.html",
+      "https://linux.oracle.com/errata/ELSA-2019-1152.html",
+      "https://lists.apache.org/thread.html/09fc842ff444cd43d9d4c510756fec625ef8eb1175f14fd21de2605f@%3Cdevnull.infra.apache.org%3E",
+      "https://lists.apache.org/thread.html/2b52b9c8b9d6366a4f1b407a8bde6af28d9fc73fdb3b37695fd0d9ac@%3Cdevnull.infra.apache.org%3E",
+      "https://lists.apache.org/thread.html/320441dccbd9a545320f5f07306d711d4bbd31ba43dc9eebcfc602df@%3Cdevnull.infra.apache.org%3E",
+      "https://lists.apache.org/thread.html/46c055e173b52d599c648a98199972dbd6a89d2b4c4647b0500f2284@%3Cdevnull.infra.apache.org%3E",
+      "https://lists.apache.org/thread.html/57673a78c4d5c870d3f21465c7e2946b9f8285c7c57e54c2ae552f02@%3Ccommits.airflow.apache.org%3E",
+      "https://lists.apache.org/thread.html/7f39f01392d320dfb48e4901db68daeece62fd60ef20955966739993@%3Ccommits.airflow.apache.org%3E",
+      "https://lists.apache.org/thread.html/b2380d147b508bbcb90d2cad443c159e63e12555966ab4f320ee22da@%3Ccommits.airflow.apache.org%3E",
+      "https://lists.apache.org/thread.html/f0c4a03418bcfe70c539c5dbaf99c04c98da13bfa1d3266f08564316@%3Ccommits.airflow.apache.org%3E",
+      "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/DSW3QZMFVVR7YE3UT4YRQA272TYAL5AF",
+      "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/DSW3QZMFVVR7YE3UT4YRQA272TYAL5AF/",
+      "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/QCDYIS254EJMBNWOG4S5QY6AOTOR4TZU",
+      "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/QCDYIS254EJMBNWOG4S5QY6AOTOR4TZU/",
+      "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/TS7IVZAJBWOHNRDMFJDIZVFCMRP6YIUQ",
+      "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/TS7IVZAJBWOHNRDMFJDIZVFCMRP6YIUQ/",
+      "https://nvd.nist.gov/vuln/detail/CVE-2019-10906",
+      "https://palletsprojects.com/blog/jinja-2-10-1-released",
+      "https://palletsprojects.com/blog/jinja-2-10-1-released/",
+      "https://ubuntu.com/security/notices/USN-4011-1",
+      "https://ubuntu.com/security/notices/USN-4011-2",
+      "https://usn.ubuntu.com/4011-1",
+      "https://usn.ubuntu.com/4011-1/",
+      "https://usn.ubuntu.com/4011-2",
+      "https://usn.ubuntu.com/4011-2/",
+      "https://www.cve.org/CVERecord?id=CVE-2019-10906"
+     ],
+     "PublishedDate": "2019-04-07T00:29:00.213Z",
+     "LastModifiedDate": "2026-06-17T02:11:52.25Z"
+    }
+   ]
+  },
+  {
+   "Target": "Dockerfile",
+   "Class": "config",
+   "Type": "dockerfile",
+   "MisconfSummary": {
+    "Successes": 25,
+    "Failures": 2
+   },
+   "Misconfigurations": [
+    {
+     "Type": "Dockerfile Security Check",
+     "ID": "DS-0002",
+     "Title": "Image user should not be 'root'",
+     "Description": "Running containers with 'root' user can lead to a container escape situation. It is a best practice to run containers as non-root users, which can be done by adding a 'USER' statement to the Dockerfile.",
+     "Message": "Specify at least 1 USER command in Dockerfile with non-root user as argument",
+     "Namespace": "builtin.dockerfile.DS002",
+     "Query": "data.builtin.dockerfile.DS002.deny",
+     "Resolution": "Add 'USER <non root user name>' line to the Dockerfile",
+     "Severity": "HIGH",
+     "PrimaryURL": "https://avd.aquasec.com/misconfig/ds-0002",
+     "References": [
+      "https://docs.docker.com/develop/develop-images/dockerfile_best-practices/",
+      "https://avd.aquasec.com/misconfig/ds-0002"
+     ],
+     "Status": "FAIL",
+     "CauseMetadata": {
+      "Provider": "Dockerfile",
+      "Service": "general"
+     }
+    },
+    {
+     "Type": "Dockerfile Security Check",
+     "ID": "DS-0026",
+     "Title": "No HEALTHCHECK defined",
+     "Description": "You should add HEALTHCHECK instruction in your docker container images to perform the health check on running containers.",
+     "Message": "Add HEALTHCHECK instruction in your Dockerfile",
+     "Namespace": "builtin.dockerfile.DS026",
+     "Query": "data.builtin.dockerfile.DS026.deny",
+     "Resolution": "Add HEALTHCHECK instruction in Dockerfile",
+     "Severity": "LOW",
+     "PrimaryURL": "https://avd.aquasec.com/misconfig/ds-0026",
+     "References": [
+      "https://blog.aquasec.com/docker-security-best-practices",
+      "https://avd.aquasec.com/misconfig/ds-0026"
+     ],
+     "Status": "FAIL",
+     "CauseMetadata": {
+      "Provider": "Dockerfile",
+      "Service": "general"
+     }
+    }
+   ]
+  }
+ ]
+}
