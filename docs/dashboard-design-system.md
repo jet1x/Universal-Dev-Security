@@ -1,6 +1,6 @@
 # UDS Dashboard Design System
 
-Version: 1.0.0
+Version: 1.0.1
 
 ## Product surfaces
 

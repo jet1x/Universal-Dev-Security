@@ -20,7 +20,7 @@ uds doctor
 ```
 
 ```text
-UDS 1.0.0 · Python 3.12.4 · Windows 11
+UDS 1.0.1 · Python 3.12.4 · Windows 11
 Git available: yes
 Project config: not initialized
 Scanners:

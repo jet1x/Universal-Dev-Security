@@ -7,7 +7,7 @@ industry-standard scanners on any project, normalizes their results into one
 schema, enforces a central security policy for Git and AI coding agents, and
 produces a dark, self-contained HTML security dashboard.
 
-> **Status:** `1.0.0` — first stable release. See
+> **Status:** `1.0.1` — stable. See
 > [DEVELOPMENT_STATUS.md](https://github.com/jet1x/Universal-Dev-Security/blob/main/DEVELOPMENT_STATUS.md) for verified functionality,
 > known issues and test results. UDS reports what its scanners find; a clean
 > result is never proof that a project is secure.

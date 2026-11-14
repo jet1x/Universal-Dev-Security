@@ -9,7 +9,7 @@
   -AddToPath is given (user PATH only).
 
 .EXAMPLE
-  .\scripts\install.ps1 -Wheel .\dist\1.0.0\universal_dev_security-1.0.0-py3-none-any.whl
+  .\scripts\install.ps1 -Wheel .\dist\1.0.1\universal_dev_security-1.0.1-py3-none-any.whl
 #>
 [CmdletBinding()]
 param(

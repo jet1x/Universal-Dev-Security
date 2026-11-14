@@ -4,8 +4,8 @@
 # SHA256SUMS when present) or a pip specification. Does not install scanners and
 # does not modify shell profiles.
 #
-#   sh scripts/install.sh --wheel dist/1.0.0/universal_dev_security-1.0.0-py3-none-any.whl
-#   sh scripts/install.sh --spec universal-dev-security==1.0.0
+#   sh scripts/install.sh --wheel dist/1.0.1/universal_dev_security-1.0.1-py3-none-any.whl
+#   sh scripts/install.sh --spec universal-dev-security==1.0.1
 set -eu
 
 WHEEL=""

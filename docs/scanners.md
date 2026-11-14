@@ -5,7 +5,7 @@
 | Scanner | Category | Minimum | Verified with | Applies when | Network behavior |
 |---|---|---|---|---|---|
 | Gitleaks | Secrets | 8.19.0 (`gitleaks dir`) | 8.30.1 (real binary) | Always | Fully offline |
-| Semgrep | Code (SAST) | 1.0.0 | Fixtures only (see DEVELOPMENT_STATUS) | Source code present | Downloads registry rule packs; UDS forces `--metrics=off`; source is not uploaded |
+| Semgrep | Code (SAST) | 1.0.0 | CI (latest PyPI release, self-scan) | Source code present | Downloads registry rule packs; UDS forces `--metrics=off`; source is not uploaded |
 | OSV-Scanner | Dependencies | 1.4.0 (v1 and v2 CLI) | 2.7.1 (real binary) | Manifests/lockfiles present | **Sends package names + versions to osv.dev** — requires `--allow-network` or `allow_network = true` |
 | Trivy | Dependencies + misconfiguration | 0.45.0 | 0.76.2 (real binary) | Manifests or Docker/IaC files present | Downloads vulnerability DB and checks; files analysed locally |
 
