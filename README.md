@@ -36,6 +36,10 @@ else is `unclassified`. No security score is invented.
 
 ## Quick start
 
+New to UDS? The **[Getting started guide](https://github.com/jet1x/Universal-Dev-Security/blob/main/docs/getting-started.md)**
+walks through installation, your first scan, reading the dashboard, fixing findings and turning
+on protection, with real example output.
+
 Requirements: Python 3.11+, Windows, Linux or macOS. Git is recommended.
 
 ```bash
@@ -66,6 +70,7 @@ for scanner installation and upgrades, and [docs/commands.md](https://github.com
 
 ## Documentation
 
+- [Getting started](https://github.com/jet1x/Universal-Dev-Security/blob/main/docs/getting-started.md)
 - [Installation and upgrades](https://github.com/jet1x/Universal-Dev-Security/blob/main/docs/installation.md)
 - [Commands](https://github.com/jet1x/Universal-Dev-Security/blob/main/docs/commands.md)
 - [Scanners, severity and privacy](https://github.com/jet1x/Universal-Dev-Security/blob/main/docs/scanners.md)

@@ -66,8 +66,8 @@ as "do not proceed". Responses never contain secret values.
 ## Git hooks
 
 ```bash
-uds hooks install --apply                 # pre-commit + pre-push
-uds hooks install --apply --python-path   # embed this interpreter (works without uds on PATH)
+uds hooks install --apply                 # pre-commit + pre-push (embeds this interpreter)
+uds hooks install --apply --path-only     # rely only on `uds` from PATH
 uds hooks status
 ```
 

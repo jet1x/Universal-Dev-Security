@@ -52,7 +52,7 @@ incomplete with `--require-complete`, or invalid input.
 
 | Command | Purpose |
 |---|---|
-| `uds hooks install [PATH] [--apply] [--python-path]` | Install `pre-commit` and `pre-push` hooks |
+| `uds hooks install [PATH] [--apply] [--path-only]` | Install `pre-commit` and `pre-push` hooks (embed this Python interpreter, with `uds` on PATH as fallback; `--path-only` uses PATH only) |
 | `uds hooks uninstall [PATH] [--apply]` | Remove UDS-owned hooks only |
 | `uds hooks status [PATH]` | Show hook state (`uds`, `foreign`, `missing`) |
 | `uds hook git-pre-commit` / `git-pre-push` | Hook entry points (called by Git) |

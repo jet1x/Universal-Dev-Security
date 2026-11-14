@@ -195,9 +195,14 @@ def register(sub: Any, with_path: Callable[[argparse.ArgumentParser], argparse.A
     for name in ("install", "uninstall"):
         hp = with_path(hsub.add_parser(name))
         hp.add_argument("--apply", action="store_true", help="Make the change (default is a dry run)")
-        hp.add_argument("--python-path", action="store_true",
-                        help="Embed this Python interpreter in the hook instead of relying on `uds` on PATH")
-        hp.set_defaults(func=cmd_hooks)
+        # Git hooks live in .git/hooks, which is never committed, so embedding this machine's
+        # interpreter path is safe and avoids blocking commits when `uds` is not on PATH
+        # (e.g. committing from an editor without the virtual environment activated).
+        hp.add_argument("--path-only", dest="python_path", action="store_false",
+                        help="Rely only on `uds` from PATH instead of embedding this Python interpreter")
+        hp.add_argument("--python-path", dest="python_path", action="store_true",
+                        help="Embed this Python interpreter (default; kept for compatibility)")
+        hp.set_defaults(func=cmd_hooks, python_path=True)
     with_path(hsub.add_parser("status")).set_defaults(func=cmd_hooks, apply=False, python_path=False)
 
     p = sub.add_parser("integrate", help="Set up Claude Code, GitHub Actions or VS Code integration")

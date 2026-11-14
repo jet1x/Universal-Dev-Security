@@ -4,6 +4,19 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 Semantic Versioning (PEP 440 pre-release suffixes).
 
+## [Unreleased]
+
+### Added
+- `docs/getting-started.md`: step-by-step guide from installation to a protected project,
+  with real example output; linked from the README.
+- README links are absolute so they work on the PyPI project page.
+
+### Changed
+- `uds hooks install` now embeds the current Python interpreter by default (Git hooks are never
+  committed, so the machine-specific path is safe), with `uds` on PATH as fallback. Previously a
+  hook relying only on PATH blocked every commit made without the virtual environment
+  activated. Use `--path-only` for the old behavior.
+
 ## [1.0.0] — 2026-11-14
 
 First stable release. Includes everything in 1.0.0rc1 plus improvements from the

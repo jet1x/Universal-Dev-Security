@@ -131,3 +131,15 @@ def test_hook_install_is_recoverable(repo):
     restore = RecoveryManager(repo).restore(result["checkpoint"])
     assert restore["status"] == "restored"
     assert not (repo / ".git" / "hooks" / "pre-commit").exists()
+
+
+def test_cli_hooks_embed_interpreter_by_default(repo, capsys):
+    # Regression (found while writing the getting-started guide): hooks that relied only on
+    # `uds` from PATH blocked every commit made outside the activated virtual environment.
+    from universal_dev_security.cli import main
+    assert main(["hooks", "install", str(repo), "--apply"]) == 0
+    script = (repo / ".git" / "hooks" / "pre-commit").read_text(encoding="utf-8")
+    assert "UDS_PY=" in script and "command -v uds" in script  # interpreter first, PATH fallback
+    main(["hooks", "uninstall", str(repo), "--apply"])
+    assert main(["hooks", "install", str(repo), "--apply", "--path-only"]) == 0
+    assert "UDS_PY=" not in (repo / ".git" / "hooks" / "pre-commit").read_text(encoding="utf-8")
