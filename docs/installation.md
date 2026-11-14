@@ -7,7 +7,7 @@ UDS requires Python 3.11 or newer and has no runtime dependencies.
 **Windows (user-level, no administrator rights):**
 
 ```powershell
-.\scripts\install.ps1 -Wheel .\dist\1.0.0rc1\universal_dev_security-1.0.0rc1-py3-none-any.whl
+.\scripts\install.ps1 -Wheel .\dist\1.0.0\universal_dev_security-1.0.0-py3-none-any.whl
 # optional: add the venv Scripts folder to your *user* PATH
 .\scripts\install.ps1 -Wheel <wheel> -AddToPath
 ```
@@ -15,7 +15,7 @@ UDS requires Python 3.11 or newer and has no runtime dependencies.
 **Linux / macOS:**
 
 ```bash
-sh scripts/install.sh --wheel dist/1.0.0rc1/universal_dev_security-1.0.0rc1-py3-none-any.whl
+sh scripts/install.sh --wheel dist/1.0.0/universal_dev_security-1.0.0-py3-none-any.whl
 export PATH="$HOME/.local/share/uds/venv/bin:$PATH"
 ```
 

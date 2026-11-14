@@ -1,6 +1,6 @@
 # Development Status
 
-**Current version:** `1.0.0rc1` — published as a GitHub pre-release (tag `v1.0.0rc1`, assets checksum-verified after upload). `main` contains unreleased improvements (see CHANGELOG).
+**Current version:** `1.0.0` — first stable release (tag `v1.0.0`). Previous: `1.0.0rc1` GitHub pre-release.
 **Last updated:** 2026-11-14
 **Previous version:** 0.4.1 (original source archived at `dist/uds-0.4.1-original-source-backup.zip`, git-ignored)
 
@@ -18,7 +18,7 @@
 | 8 | Technology profiles and compatibility | ✅ Complete | `test_detector.py` (17 technologies, nested projects, exclusions) |
 | 9 | Installer, updates and release management | ✅ Complete | `scripts/release.py` run end-to-end; `install.ps1` install + tampered-checksum rejection tested |
 | 10 | Cross-platform compatibility | ✅ Complete | GitHub Actions run 43534444713: all 12 matrix jobs (Windows/Linux/macOS × Python 3.11–3.14) passed |
-| 11 | Production readiness / release preparation | ✅ RC prepared — awaiting approval | Security audit below; artifacts in `dist/1.0.0rc1/` |
+| 11 | Production readiness / release preparation | ✅ Complete | Security audit below; 1.0.0rc1 pre-release, live verification, 1.0.0 built in `dist/1.0.0/` |
 
 ## Test results (actually executed)
 
@@ -72,7 +72,7 @@
 
 ## Pending decisions (need maintainer approval)
 
-- Final `1.0.0` release (1.0.0rc1 is a GitHub pre-release; all release-candidate checks are now done).
+- Publishing the `v1.0.0` GitHub release (tag pushed; assets uploaded by the maintainer).
 - PyPI publication (not done).
 - Private vulnerability reporting is enabled (verified via API); secret-scanning push protection
   was enabled by the maintainer but cannot be verified without repository-admin authentication.

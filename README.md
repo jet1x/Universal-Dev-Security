@@ -7,7 +7,7 @@ industry-standard scanners on any project, normalizes their results into one
 schema, enforces a central security policy for Git and AI coding agents, and
 produces a dark, self-contained HTML security dashboard.
 
-> **Status:** `1.0.0rc1` — release candidate. See
+> **Status:** `1.0.0` — first stable release. See
 > [DEVELOPMENT_STATUS.md](DEVELOPMENT_STATUS.md) for verified functionality,
 > known issues and test results. UDS reports what its scanners find; a clean
 > result is never proof that a project is secure.
@@ -40,12 +40,12 @@ Requirements: Python 3.11+, Windows, Linux or macOS. Git is recommended.
 
 ```powershell
 # Windows (from a release folder containing the wheel and SHA256SUMS)
-.\scripts\install.ps1 -Wheel .\dist\1.0.0rc1\universal_dev_security-1.0.0rc1-py3-none-any.whl
+.\scripts\install.ps1 -Wheel .\dist\1.0.0\universal_dev_security-1.0.0-py3-none-any.whl
 ```
 
 ```bash
 # Linux / macOS
-sh scripts/install.sh --wheel dist/1.0.0rc1/universal_dev_security-1.0.0rc1-py3-none-any.whl
+sh scripts/install.sh --wheel dist/1.0.0/universal_dev_security-1.0.0-py3-none-any.whl
 ```
 
 Then, inside a project:

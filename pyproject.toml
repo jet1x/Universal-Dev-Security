@@ -13,7 +13,7 @@ license-files = ["LICENSE"]
 dependencies = []
 keywords = ["security", "devsecops", "gitleaks", "semgrep", "osv-scanner", "trivy", "sast", "sca", "claude-code", "secrets"]
 classifiers = [
-    "Development Status :: 4 - Beta",
+    "Development Status :: 5 - Production/Stable",
     "Environment :: Console",
     "Intended Audience :: Developers",
     "Operating System :: Microsoft :: Windows",

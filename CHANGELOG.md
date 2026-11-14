@@ -4,9 +4,10 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 Semantic Versioning (PEP 440 pre-release suffixes).
 
-## [Unreleased]
+## [1.0.0] — 2026-11-14
 
-Improvements from the first live scan of a real Next.js project.
+First stable release. Includes everything in 1.0.0rc1 plus improvements from the
+first live scan of a real Next.js project and live verification of the Claude Code hook.
 
 ### Added
 - Secret findings record Git exposure (`tracked_in_git`): committed and shared, or local only.
@@ -23,6 +24,12 @@ Improvements from the first live scan of a real Next.js project.
 
 ### Fixed
 - The scanner coverage table showed `0` findings for scanners that did not run; it now shows `—`.
+- `uds integrate claude-code --python-path` printed a note saying the hook runs `uds` from PATH.
+
+### Verified
+- Claude Code hook verified in live Claude Code 2.1.323 sessions; documented that Claude Code
+  runs project hooks only in trusted workspaces.
+- CI: Windows, Linux and macOS × Python 3.11–3.14 plus real-scanner integration.
 
 ## [1.0.0rc1] — 2026-11-14 (GitHub pre-release)
 
