@@ -204,3 +204,10 @@ def test_integrate_cli_dry_run(tmp_path, capsys):
     assert main(["integrate", "github", str(tmp_path)]) == 0
     assert "Dry run only" in capsys.readouterr().out
     assert not (tmp_path / ".github").exists()
+
+
+def test_install_notes_match_hook_location(tmp_path):
+    # Regression: the "uds from PATH" note was shown even with --python-path.
+    assert "from PATH" in claude_code.install(tmp_path)["notes"][0]
+    note = claude_code.install(tmp_path, use_python_path=True)["notes"][0]
+    assert "from PATH" not in note and "interpreter directly" in note

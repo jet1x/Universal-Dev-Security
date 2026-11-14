@@ -178,9 +178,14 @@ def install(root: Path, *, apply: bool = False, remove: bool = False, local: boo
     result = apply_changes(root, {relative: new_content}, f"claude-code integration ({'remove' if remove else 'install'})", apply)
     result["settings_file"] = relative
     if not remove:
+        location = (f"The hook runs this Python interpreter directly ({sys.executable}); keep that environment "
+                    "installed, and prefer --local because the path is machine-specific."
+                    if use_python_path else
+                    "The hook runs `uds` from PATH; if it is not on PATH the hook cannot run. Use --python-path to "
+                    "embed this interpreter (recommended together with --local, because absolute paths are "
+                    "machine-specific).")
         result["notes"] = [
-            "The hook runs `uds` from PATH; if it is not on PATH the hook cannot run. Use --python-path to embed "
-            "this interpreter (recommended together with --local, because absolute paths are machine-specific).",
+            location,
             "The hook only adds 'ask'/'deny' decisions; it never auto-approves tool calls.",
             "`git push` additionally requires approval through permissions.ask as defense in depth.",
         ]
