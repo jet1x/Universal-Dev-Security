@@ -17,7 +17,7 @@
 | 7 | Automatic fixes, testing and recovery | ✅ Complete | `test_recovery_fixes.py` (rollback on failing tests, baseline check, conflict protection) |
 | 8 | Technology profiles and compatibility | ✅ Complete | `test_detector.py` (17 technologies, nested projects, exclusions) |
 | 9 | Installer, updates and release management | ✅ Complete | `scripts/release.py` run end-to-end; `install.ps1` install + tampered-checksum rejection tested |
-| 10 | Cross-platform compatibility | ⚠️ Configured, Windows verified | CI matrix (Windows/Linux/macOS × 3.11–3.14) defined but not yet executed — requires pushing to GitHub |
+| 10 | Cross-platform compatibility | ✅ Complete | GitHub Actions run 43534444713: all 12 matrix jobs (Windows/Linux/macOS × Python 3.11–3.14) passed |
 | 11 | Production readiness / release preparation | ✅ RC prepared — awaiting approval | Security audit below; artifacts in `dist/1.0.0rc1/` |
 
 ## Test results (actually executed)
@@ -31,7 +31,7 @@
 | `scripts/release.py` | Tests ✓, self-scan ✓, sdist+wheel ✓, SHA256SUMS ✓, fresh-venv install + CLI smoke test ✓ |
 | `scripts/install.ps1` | Installs with checksum verification ✓; tampered checksum rejected, nothing installed ✓ |
 | Self-scan (`uds scan . --allow-network`) | Gitleaks, OSV-Scanner, Trivy: clean. Semgrep: not run (known issue 1) → status `incomplete` |
-| Linux / macOS | **Not executed** (no WSL/Docker locally; CI not yet run) |
+| GitHub Actions (commit 760cf4b) | **13/13 jobs passed**: Windows, Ubuntu, macOS × Python 3.11, 3.12, 3.13, 3.14, plus the real-scanner job (Gitleaks 8.30.1, OSV-Scanner 2.7.1, Trivy 0.76.2, Semgrep from PyPI; tests + `uds doctor` + self-scan with `--allow-network --fail-on high`) |
 
 ## Security audit (1.0.0rc1)
 
@@ -51,11 +51,13 @@
 
 ## Known issues
 
-1. **Semgrep adapter verified only against documented-format fixtures.** Installing Semgrep failed
-   in this environment (network errors from PyPI on a dependency). The CI `integration` job
-   installs Semgrep and will exercise it for real.
-2. **GitHub workflows not executed yet.** Both the project CI and the generated user workflow are
-   YAML-validated but have not run on GitHub (pushing requires approval).
+1. **Semgrep verified in CI only.** Semgrep could not be installed locally (PyPI network errors).
+   In CI it was installed and the self-scan (which runs Semgrep on this Python repository and fails
+   on scanner errors or high findings) passed. Its detailed output was not reviewed locally because
+   job logs and artifacts require GitHub authentication.
+2. **Generated user workflow not yet run on GitHub.** The project's own CI ran green; the
+   `uds integrate github` template is YAML-validated and mirrors the CI install steps, but has not
+   been run in a user repository.
 3. **Claude Code hook not exercised in a live Claude Code session.** The hook protocol is
    implemented per Claude Code's documented `PreToolUse` contract and unit-tested; a live check is
    recommended (`uds integrate claude-code --apply` in a test project). The hook needs `uds` on
@@ -77,7 +79,7 @@
 
 ## Next development tasks
 
-1. Run CI on GitHub; fix any Linux/macOS issues it reveals; verify Semgrep end-to-end.
+1. Review the CI self-scan artifact (Semgrep findings) and run the generated workflow in a sample repository.
 2. Live-test the Claude Code hook in a sample project.
 3. Pin GitHub Actions to commit SHAs in both workflows.
 4. Optional offline mode for OSV-Scanner (local databases) to avoid sending package metadata.
