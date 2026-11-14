@@ -111,6 +111,7 @@ class Finding:
     references: list[str] = field(default_factory=list)
     remediation: str = ""
     fingerprint: str = ""
+    tracked_in_git: bool | None = None  # secrets only: True = committed, False = local-only, None = unknown
 
     def __post_init__(self) -> None:
         self.category = Category(self.category)

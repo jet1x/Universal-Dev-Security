@@ -39,10 +39,26 @@ def recommendations(scan: dict[str, Any], comparison: dict[str, Any] | None = No
     recs: list[dict[str, str]] = []
     findings = scan.get("findings", [])
     secrets = [f for f in findings if f.get("category") == "secret"]
-    if secrets:
-        recs.append({"priority": "urgent", "title": f"Rotate {len(secrets)} potentially exposed credential(s)",
+    committed = [f for f in secrets if f.get("tracked_in_git") is True]
+    local_only = [f for f in secrets if f.get("tracked_in_git") is False]
+    unknown = [f for f in secrets if f.get("tracked_in_git") is None]
+    if committed:
+        recs.append({"priority": "urgent", "title": f"Rotate {len(committed)} credential(s) found in Git-tracked files",
+                     "detail": "These secrets are committed and shared with everyone who can access the repository. "
+                               "Revoke or rotate each with its issuer first, then remove it from the code and plan "
+                               "an approved Git history clean-up."})
+    if unknown:
+        recs.append({"priority": "urgent", "title": f"Rotate {len(unknown)} potentially exposed credential(s)",
                      "detail": "Revoke or rotate each credential with its issuer before removing it from code. "
                                "If it was committed, plan an approved Git history clean-up."})
+    if local_only:
+        files = sorted({str(f.get("file")) for f in local_only})
+        shown = ", ".join(files[:5]) + (f" and {len(files) - 5} more file(s)" if len(files) > 5 else "")
+        recs.append({"priority": "medium",
+                     "title": f"{len(local_only)} potential secret(s) in local files not tracked by Git",
+                     "detail": f"Found in {shown}. These have not been shared through Git. Keep the files "
+                               "git-ignored and out of shared folders, and rotate any credential that was ever "
+                               "committed, shared or published elsewhere."})
     deps = [f for f in findings if f.get("category") == "dependency"]
     fixable = sorted({f"{f.get('package')} → {f.get('fixed_version')}" for f in deps if f.get("fixed_version")})
     if fixable:
@@ -211,6 +227,7 @@ input{flex:1;min-width:200px}button{cursor:pointer;font-weight:650}button:hover{
 .finding .body{padding:0 16px 14px 34px;display:grid;gap:6px}.finding dl{display:grid;grid-template-columns:max-content 1fr;gap:4px 14px;margin:0}
 .finding dt{color:var(--muted);font-size:12px}.finding dd{margin:0;overflow-wrap:anywhere}
 .tag{display:inline-flex;border:1px solid var(--line);border-radius:7px;padding:2px 7px;color:#c2d0e2;background:#132238;font-size:11px;font-weight:700}
+.tag-bad{color:var(--bad);background:#3b202b80;border-color:#713642}
 .rec{border-left:3px solid var(--accent);background:#0f2a2f;padding:10px 14px;border-radius:0 10px 10px 0;margin-bottom:8px}
 .rec.urgent{border-left-color:var(--sev-critical);background:#2c1620}.rec.high{border-left-color:var(--sev-high);background:#2b1d16}
 .rec.coverage{border-left-color:var(--warn);background:#2a2416}.rec .p{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
@@ -244,6 +261,12 @@ def _status_pill(status: str) -> str:
     return f'<span class="pill {cls}">{_e(label)}</span>'
 
 
+def _exposure(f: dict[str, Any]) -> str | None:
+    if f.get("category") != "secret" or f.get("tracked_in_git") is None:
+        return None
+    return "in-git" if f["tracked_in_git"] else "local"
+
+
 def _finding_html(f: dict[str, Any]) -> str:
     sev = f.get("severity", "unclassified")
     loc = f.get("file") or "—"
@@ -256,6 +279,10 @@ def _finding_html(f: dict[str, Any]) -> str:
         rows.append(("Fixed in", _e(f.get("fixed_version") or "No fix listed")))
     if f.get("commit"):
         rows.append(("Commit", f"<code>{_e(f['commit'])}</code>"))
+    exposure = _exposure(f)
+    if exposure:
+        rows.append(("Git exposure", _e({"in-git": "Tracked by Git — committed and shared",
+                                         "local": "Not tracked by Git — local file only"}[exposure])))
     source = f.get("severity_source", "none")
     sev_note = {"scanner": "reported by scanner", "cvss-qualitative-scale": "CVSS qualitative scale",
                 "advisory-database": "advisory database", "none": "no validated severity available"}.get(source, source)
@@ -274,7 +301,9 @@ def _finding_html(f: dict[str, Any]) -> str:
     return (f'<details class="finding" data-severity="{_e(sev)}" data-tool="{_e(f.get("tool"))}" '
             f'data-category="{_e(f.get("category"))}"><summary><span class="sev sev-{_e(sev)}">{_e(sev)}</span>'
             f'<span class="title">{_e(f.get("title") or f.get("rule_id"))}</span>'
-            f'<span class="tag">{_e(f.get("tool"))}</span><span class="loc">{_e(loc)}</span></summary>'
+            + ({"in-git": '<span class="tag tag-bad">in Git</span>',
+                "local": '<span class="tag">local only</span>'}.get(exposure or "", ""))
+            + f'<span class="tag">{_e(f.get("tool"))}</span><span class="loc">{_e(loc)}</span></summary>'
             f'<div class="body"><dl>{dl}</dl></div></details>')
 
 
@@ -294,8 +323,11 @@ def _comparison_html(comparison: dict[str, Any] | None) -> str:
     )
     table = (f'<div class="table-wrap" style="margin-top:12px"><table><thead><tr><th>Severity</th><th>Finding</th><th>File</th>'
              f'<th>Change</th></tr></thead><tbody>{items}</tbody></table></div>') if items else ""
+    warnings = "".join(f'<div class="rec coverage"><div class="p">scope changed</div>{_e(w)}</div>'
+                       for w in comparison.get("warnings", []))
     return (f'<p class="muted">Compared with scan <code>{_e(comparison.get("base_scan_id"))}</code> for '
-            f'{_e(", ".join(comparison.get("compared_tools", [])) or "no common scanners")}.</p>{stats}{table}'
+            f'{_e(", ".join(comparison.get("compared_tools", [])) or "no common scanners")}.</p>'
+            f'{warnings}{stats}{table}'
             f'<p class="muted" style="font-size:12px">{_e(comparison.get("note"))}</p>')
 
 
@@ -326,7 +358,7 @@ def render_html(report: dict[str, Any]) -> str:
 
     scanner_rows = "".join(
         f'<tr><td><b>{_e(s.get("tool"))}</b></td><td>{_status_pill(str(s.get("status")))}</td><td>{_e(s.get("version") or "—")}</td>'
-        f'<td>{_e(s.get("finding_count"))}</td><td class="muted">{_e(s.get("message"))}</td></tr>'
+        f'<td>{_e(s.get("finding_count")) if s.get("executed") else "—"}</td><td class="muted">{_e(s.get("message"))}</td></tr>'
         for s in report.get("scanners", [])
     )
     privacy_rows = "".join(

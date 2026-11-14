@@ -4,7 +4,27 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 Semantic Versioning (PEP 440 pre-release suffixes).
 
-## [1.0.0rc1] — 2026-11-14 (release candidate, not published)
+## [Unreleased]
+
+Improvements from the first live scan of a real Next.js project.
+
+### Added
+- Secret findings record Git exposure (`tracked_in_git`): committed and shared, or local only.
+  Recommendations and the dashboard (`in Git` / `local only` tags) distinguish them; only
+  committed or unknown secrets are reported as urgent rotations.
+- Scan comparisons warn when the scan scope (exclusions) changed, because findings shown as
+  "resolved" may have been excluded rather than fixed (`scope_fingerprint`).
+
+### Changed
+- Findings are ordered by priority: committed secrets first, then severity (critical → unclassified).
+- Secret scanning excludes framework caches and dev-server builds (`.next/cache`, `.next/dev`,
+  `.turbo`, `.parcel-cache`, `.angular/cache`); deployable output (`.next/static`,
+  `.next/server`) is still scanned. On the test project this removed 97% of noise (708 → 29).
+
+### Fixed
+- The scanner coverage table showed `0` findings for scanners that did not run; it now shows `—`.
+
+## [1.0.0rc1] — 2026-11-14 (GitHub pre-release)
 
 ### Added
 - **Policy engine** (`policy.py`): immutable global rules returning allow / ask / deny with risk

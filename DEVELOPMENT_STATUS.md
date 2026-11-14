@@ -1,6 +1,6 @@
 # Development Status
 
-**Current version:** `1.0.0rc1` (release candidate — built and verified locally, **not published**)
+**Current version:** `1.0.0rc1` — published as a GitHub pre-release (tag `v1.0.0rc1`, assets checksum-verified after upload). `main` contains unreleased improvements (see CHANGELOG).
 **Last updated:** 2026-11-14
 **Previous version:** 0.4.1 (original source archived at `dist/uds-0.4.1-original-source-backup.zip`, git-ignored)
 
@@ -31,6 +31,7 @@
 | `scripts/release.py` | Tests ✓, self-scan ✓, sdist+wheel ✓, SHA256SUMS ✓, fresh-venv install + CLI smoke test ✓ |
 | `scripts/install.ps1` | Installs with checksum verification ✓; tampered checksum rejected, nothing installed ✓ |
 | Self-scan (`uds scan . --allow-network`) | Gitleaks, OSV-Scanner, Trivy: clean. Semgrep: not run (known issue 1) → status `incomplete` |
+| Live scan of a real Next.js project (maintainer's own) | All scanners except Semgrep ran; 0 secrets in Git-tracked files; dashboard reviewed visually by the maintainer. Revealed 4 issues (noise from `.next` caches, alarmist rotation advice for local-only secrets, severity ordering, misleading `0` for scanners that did not run) and a 5th (scope changes shown as "resolved") — all fixed with regression tests (`test_exposure.py`) |
 | GitHub Actions (commit 760cf4b) | **13/13 jobs passed**: Windows, Ubuntu, macOS × Python 3.11, 3.12, 3.13, 3.14, plus the real-scanner job (Gitleaks 8.30.1, OSV-Scanner 2.7.1, Trivy 0.76.2, Semgrep from PyPI; tests + `uds doctor` + self-scan with `--allow-network --fail-on high`) |
 
 ## Security audit (1.0.0rc1)
@@ -62,9 +63,7 @@
    implemented per Claude Code's documented `PreToolUse` contract and unit-tested; a live check is
    recommended (`uds integrate claude-code --apply` in a test project). The hook needs `uds` on
    PATH unless `--python-path` is used.
-4. **Dashboard not visually reviewed in a browser by the developer agent.** Structure, escaping,
-   CSP and well-formedness are tested; a manual visual check is recommended
-   (`uds dashboard --open`).
+4. ~~Dashboard not visually reviewed~~ — reviewed by the maintainer on a real project (2026-11-14).
 5. `install.sh` is written for Linux/macOS and has not been executed.
 6. Python 3.15 is newer than some packages support (PyYAML, Semgrep wheels); UDS itself is
    dependency-free and works on 3.11–3.15.
@@ -73,9 +72,10 @@
 
 ## Pending decisions (need maintainer approval)
 
-- Publish `1.0.0rc1` (PyPI and/or a GitHub release with `SHA256SUMS`). The source is pushed to
-  https://github.com/jet1x/Universal-Dev-Security; no tag or release has been created.
-- Enable private vulnerability reporting and secret-scanning push protection on the repository.
+- Final `1.0.0` release after the live Claude Code hook test (1.0.0rc1 is a GitHub pre-release).
+- PyPI publication (not done).
+- Private vulnerability reporting is enabled (verified via API); secret-scanning push protection
+  was enabled by the maintainer but cannot be verified without repository-admin authentication.
 
 ## Next development tasks
 

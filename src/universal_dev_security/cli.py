@@ -131,6 +131,8 @@ def _print_scan_summary(scan: dict[str, Any], paths: dict[str, str], comparison:
     if comparison:
         print(f"Since previous scan: {len(comparison['new'])} new, {len(comparison['resolved'])} resolved, "
               f"{len(comparison['not_rescanned'])} not re-scanned")
+        for warning in comparison.get("warnings", []):
+            print(f"  ! {warning}")
     for kind, path in paths.items():
         print(f"Report ({kind}): {path}")
 

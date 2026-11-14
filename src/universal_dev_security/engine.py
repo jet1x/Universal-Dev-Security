@@ -9,10 +9,15 @@ from typing import Any, Callable
 from universal_dev_security import __version__
 from universal_dev_security.config import FAIL_ON_LEVELS, ProjectConfig
 from universal_dev_security.detector import detect_project
-from universal_dev_security.findings import Finding, ScanResult, ScanStatus, Severity, severity_counts
+import hashlib
+import json
+import shutil
+import subprocess
+
+from universal_dev_security.findings import Category, Finding, ScanResult, ScanStatus, Severity, severity_counts
 from universal_dev_security.projectfiles import build_inventory
 from universal_dev_security.scanners import get_scanner
-from universal_dev_security.scanners.base import ScanOptions
+from universal_dev_security.scanners.base import ScannerExecutionError, ScanOptions, run_tool
 
 SCHEMA_VERSION = "2.0"
 
@@ -36,6 +41,57 @@ def overall_status(results: list[ScanResult]) -> str:
     if any(r.status in (ScanStatus.NOT_INSTALLED, ScanStatus.SKIPPED) for r in results):
         return "incomplete"
     return "clean"
+
+
+def scope_fingerprint(extra_excludes: list[str]) -> str:
+    """Identify the scan scope (built-in and configured exclusions).
+
+    When it differs between two scans, findings that disappeared may have been
+    excluded rather than fixed, and comparisons must say so.
+    """
+    from universal_dev_security.projectfiles import DEFAULT_EXCLUDED_DIRS
+    from universal_dev_security.scanners.gitleaks import SECRET_SCAN_EXCLUDES
+
+    basis = json.dumps([sorted(DEFAULT_EXCLUDED_DIRS), list(SECRET_SCAN_EXCLUDES), sorted(extra_excludes)])
+    return hashlib.sha256(basis.encode("utf-8")).hexdigest()[:16]
+
+
+def git_tracked_files(root: Path) -> set[str] | None:
+    """Project-relative paths tracked by Git, or None when ``root`` is not inside a Git work tree."""
+    git = shutil.which("git")
+    if not git:
+        return None
+    try:
+        completed = run_tool([git, "ls-files", "-z"], cwd=root, timeout=120)
+    except (OSError, subprocess.SubprocessError, ScannerExecutionError):
+        return None
+    if completed.returncode != 0:
+        return None
+    return {path.replace("\\", "/") for path in completed.stdout.split("\0") if path}
+
+
+def annotate_git_exposure(root: Path, findings: list[Finding]) -> None:
+    """Mark secret findings as committed (tracked by Git) or local-only.
+
+    A secret in a tracked file has been (or will be) shared through the
+    repository and must be rotated; one in an untracked or ignored local file
+    has not left the machine through Git.
+    """
+    secrets = [f for f in findings if f.category is Category.SECRET]
+    if not secrets:
+        return
+    tracked = git_tracked_files(root)
+    for finding in secrets:
+        if finding.commit:
+            finding.tracked_in_git = True  # found in Git history
+        elif tracked is not None:
+            finding.tracked_in_git = finding.file in tracked
+
+
+def finding_sort_key(finding: Finding) -> tuple[int, int, str, str, int]:
+    """Committed secrets first, then by severity (critical → unclassified), tool, file, line."""
+    exposed = 0 if (finding.category is Category.SECRET and finding.tracked_in_git) else 1
+    return (exposed, -finding.severity.rank, finding.tool, finding.file, finding.start_line or 0)
 
 
 def threshold_reached(findings: list[Finding], fail_on: str) -> bool:
@@ -80,6 +136,8 @@ def run_scan(
         results.append(adapter.scan(root, inventory, options))
 
     findings = [finding for result in results for finding in result.findings]
+    annotate_git_exposure(root, findings)
+    findings.sort(key=finding_sort_key)
     status = overall_status(results)
     counts = severity_counts(findings)
     privacy = []
@@ -104,7 +162,8 @@ def run_scan(
             "files_inventoried": project["files_inventoried"],
             "inventory_truncated": project["inventory_truncated"],
         },
-        "options": {"tools": requested, "allow_network": options.allow_network, "fail_on": config.fail_on},
+        "options": {"tools": requested, "allow_network": options.allow_network, "fail_on": config.fail_on,
+                    "scope_fingerprint": scope_fingerprint(config.exclude_paths)},
         "overall_status": status,
         "scanners": [{k: v for k, v in r.to_dict().items() if k != "findings"} for r in results],
         "summary": {

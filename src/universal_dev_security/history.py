@@ -124,9 +124,18 @@ def compare_scans(base: dict[str, Any], current: dict[str, Any]) -> dict[str, An
             counts[item.get("severity", "unclassified")] = counts.get(item.get("severity", "unclassified"), 0) + 1
         return counts
 
+    base_scope = base.get("options", {}).get("scope_fingerprint")
+    current_scope = current.get("options", {}).get("scope_fingerprint")
+    scope_changed = base_scope is None or base_scope != current_scope
+    warnings = []
+    if scope_changed and resolved:
+        warnings.append("The scan scope changed between these scans (UDS exclusions or configured exclude_paths). "
+                        "Findings listed as resolved may have been excluded rather than fixed.")
     return {
         "base_scan_id": base.get("scan_id"),
         "current_scan_id": current.get("scan_id"),
+        "scope_changed": scope_changed,
+        "warnings": warnings,
         "compared_tools": sorted(common),
         "new": new,
         "resolved": resolved,

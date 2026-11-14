@@ -22,6 +22,10 @@ from universal_dev_security.scanners.base import (
 SECRET_SCAN_EXCLUDES = (
     ".venv", "venv", "node_modules", "bower_components", "site-packages", ".tox", ".nox", "__pycache__",
     ".mypy_cache", ".pytest_cache", ".ruff_cache", ".terraform", ".git",
+    # Framework caches and dev-server builds: never deployed, extremely noisy (found when
+    # scanning a real Next.js project: 97% of findings). Deployable output such as
+    # .next/static and .next/server is still scanned.
+    ".next/cache", ".next/dev", ".turbo", ".parcel-cache", ".angular/cache",
 )
 UDS_GENERATED = (".uds/reports", ".uds/history", ".uds/backups", ".uds/cache")
 
