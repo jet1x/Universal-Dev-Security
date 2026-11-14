@@ -26,6 +26,20 @@ python scripts/release.py
 - [ ] Artifacts and `SHA256SUMS` attached to a signed Git tag.
 - [ ] Private vulnerability reporting enabled on the repository (see SECURITY.md).
 
+## Publish to PyPI (Trusted Publishing)
+
+PyPI publication uses OIDC Trusted Publishing — no API token exists anywhere.
+
+One-time setup on PyPI (account with 2FA): *Your account → Publishing → Add a new pending
+publisher* with project `universal-dev-security`, owner `jet1x`, repository
+`Universal-Dev-Security`, workflow `publish-pypi.yml`, environment `pypi`.
+
+For each release: publish the GitHub release with its assets and `SHA256SUMS` first, then run
+*Actions → publish to PyPI → Run workflow* with the tag. The workflow downloads the release
+assets, verifies them against `SHA256SUMS`, runs `twine check --strict`, and uploads exactly
+those files, so PyPI and GitHub serve identical artifacts. PyPI files are immutable: a mistake
+requires a new version number.
+
 ## Versioning
 
 Semantic Versioning. Pre-releases use PEP 440 suffixes (`1.0.0rc1`). The JSON

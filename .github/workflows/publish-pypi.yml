@@ -1,0 +1,66 @@
+# Publish a verified GitHub release to PyPI using Trusted Publishing (OIDC).
+#
+# - Runs only when started manually (Actions → "publish to PyPI" → Run workflow).
+# - Publishes the exact assets attached to the GitHub release, after verifying them
+#   against the release's SHA256SUMS, so PyPI and GitHub serve identical files.
+# - No API token is stored anywhere: PyPI trusts this workflow via OIDC.
+name: publish to PyPI
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag to publish (its GitHub release assets are uploaded)"
+        required: true
+        default: "v1.0.0"
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    name: Publish ${{ inputs.tag }} to PyPI
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: pypi
+      url: https://pypi.org/project/universal-dev-security/
+    permissions:
+      contents: read
+      id-token: write  # required for Trusted Publishing
+    steps:
+      - name: Validate tag
+        env:
+          TAG: ${{ inputs.tag }}
+        run: |
+          echo "$TAG" | grep -Eq '^v[0-9]+\.[0-9]+\.[0-9]+((a|b|rc)[0-9]+)?$' || { echo "Invalid tag: $TAG"; exit 1; }
+
+      - name: Download and verify release assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.tag }}
+        run: |
+          set -euo pipefail
+          mkdir dist
+          gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --dir dist \
+            --pattern '*.whl' --pattern '*.tar.gz' --pattern 'SHA256SUMS'
+          cd dist
+          sha256sum -c SHA256SUMS
+          rm SHA256SUMS
+          version="${TAG#v}"
+          ls | grep -q -- "-${version}-py3-none-any.whl$" || { echo "Wheel for $version not found"; exit 1; }
+          ls | grep -q -- "-${version}.tar.gz$" || { echo "sdist for $version not found"; exit 1; }
+          ls -l
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Check package metadata
+        run: |
+          python -m pip install --upgrade twine
+          python -m twine check --strict dist/*
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
